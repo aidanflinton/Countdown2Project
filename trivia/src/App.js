@@ -4,19 +4,24 @@ import './App.css';
 import Questions from "./Questions.js"
 
 function App() {
-  const [trivia, setTrivia] = useState(null)
+    const [trivia, setTrivia] = useState(null);
 
-  useEffect(() => {
-    fetch("https://opentdb.com/api.php?amount=10")
-    .then(response => response.json())
-    .then(data => setTrivia(data.results))
-  },[]);
+    useEffect(() => {
+        fetch('https://opentdb.com/api.php?amount=10')
+            .then(response => response.json())
+            .then(data => setTrivia(data.results))
+            .catch(error => console.log(error))
+    }, []);
 
-  return (
-    <div className="App">
-      {trivia.map((item) => <Questions ask={item}/>)}
-    </div>
-  );
+    console.log(trivia);
+
+    return (
+        <div className = "App">
+            {trivia && trivia.map((item) => <Questions qstn={item.question} info={item}/>)}
+        </div>
+    );
 }
 
 export default App;
+
+//{trivia.map((item) => <Questions question={item} info={item[trivia]}/>)}
