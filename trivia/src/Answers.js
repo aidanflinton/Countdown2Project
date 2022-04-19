@@ -1,5 +1,5 @@
 import React from "react"
-import { useState , useEffect} from "react";
+import { useState } from "react";
 import Button from '@mui/material/Button';
 
 const Answers = (props) => {
@@ -16,15 +16,14 @@ const Answers = (props) => {
 
   const [style, setStyle] = useState("primary");
   
-  let changeStyle = () => {
-    setStyle("success");
-    /*
-    if(value === props.rightAns)
+  let changeStyle = ans => {
+    console.log(ans);
+     //setStyle("success");
+    if(ans === props.rightAns)
       setStyle("success");
     else{
       setStyle("error");
     }
-    */
   };
 
   return (
@@ -32,7 +31,7 @@ const Answers = (props) => {
       <div>
         {ansArray.map((item) => {
           return(
-          <Button variant="contained" color={style} onClick={changeStyle}> 
+          <Button value={item} variant="contained" color={style} onClick={(item) => changeStyle(item.target.value)}> 
             {item} 
           </Button>)
         })}
